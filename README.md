@@ -1,5 +1,5 @@
 # ProyectoFinal_PDI_DeteccionDePlacas
-# PlateGuard: Sistema de Detección Automática de Placas Vehiculares  
+# Sistema de Detección Automática de Placas Vehiculares  
 **Proyecto Final – Procesamiento Digital de Imágenes (2025-2)**  
 Universidad [Tu universidad] – [Tu nombre completo]  
 [Si es en dupla: Nombre del compañero]
