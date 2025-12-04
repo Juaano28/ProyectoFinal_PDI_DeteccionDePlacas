@@ -1,11 +1,10 @@
 # ProyectoFinal_PDI_DeteccionDePlacas
 # Sistema de Detección Automática de Placas Vehiculares  
 **Proyecto Final – Procesamiento Digital de Imágenes (2025-2)**  
-Universidad [Tu universidad] – [Tu nombre completo]  
-[Si es en dupla: Nombre del compañero]
+Universidad Nacional De Colombia – Juan Esteban López  
 
 ## 1. Problema real que resolvemos
-En el parqueadero de la universidad (y en cientos de parqueaderos/centros comerciales en Colombia) se generan largas filas en horas pico porque:
+En el parqueadero de la universidad (y en cientos de parqueaderos, conjuntos residenciales, centros comerciales en Colombia) se generan largas filas en horas pico porque:
 - El guardia debe identificar visualmente la placa del vehículo.
 - En muchos casos aún se registra manualmente la entrada/salida.
 - Esto genera congestión vehicular, pérdida de tiempo y errores humanos.
@@ -30,7 +29,7 @@ Desarrollar e implementar un sistema de detección de placas vehiculares basado 
 ## 4. Dataset utilizado
 **Principal**  
 Dataset: [License Plate Recognition](https://universe.roboflow.com/roboflow-universe-projects/license-plate-recognition-rxg4e/dataset/4)  
-- 7.053 imágenes de entrenamiento + validación  
+- 10.1252 imágenes de entrenamiento + validación  
 - 1 clase: `license_plate`  
 - Formato YOLOv11 (incluye augmentations: lluvia, noche, blur, etc.)  
 - Enlace público: https://universe.roboflow.com/roboflow-universe-projects/license-plate-recognition-rxg4e
@@ -68,7 +67,7 @@ Se podrán agregar ~200 imágenes propias capturadas en parqueaderos colombianos
 └── requirements.txt
 
 ## 7. Enlaces importantes
-- Repositorio GitHub: (este enlace)
+- Repositorio GitHub: https://github.com/Juaano28/ProyectoFinal_PDI_DeteccionDePlacas
 - Dataset en Roboflow: https://universe.roboflow.com/roboflow-universe-projects/license-plate-recognition-rxg4e
 - Hugging Face Space (demo en vivo): [se agrega al final]
 - Base de datos (enlace Drive/Roboflow): [se agrega al final]
@@ -84,14 +83,3 @@ Se podrán agregar ~200 imágenes propias capturadas en parqueaderos colombianos
 | Despliegue en HuggingFace         | Pendiente    |
 | Presentación PowerPoint           | Pendiente    |
 
-¡Listo para usar!  
-Solo crea el repositorio en GitHub, pega este contenido como README.md y ya tienes una cara profesional desde el minuto 1.
-
-Cuando me digas **“vamos con fase 1”**, te paso:
-- La estructura exacta de carpetas (para que crees todo de una)
-- El enlace de descarga directa del dataset en formato YOLOv11 (un clic)
-- El `data.yaml` listo
-- El notebook de entrenamiento que solo tendrás que ejecutar mañana en Kaggle
-
-¿Listo para crear el repo y pegar esto?  
-¡Avísame y seguimos! 🚀
