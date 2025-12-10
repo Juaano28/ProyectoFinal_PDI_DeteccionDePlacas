@@ -83,3 +83,11 @@ Se podrán agregar ~200 imágenes propias capturadas en parqueaderos colombianos
 | Despliegue en HuggingFace         | Pendiente    |
 | Presentación PowerPoint           | Pendiente    |
 
+
+## Pesos del modelo entrenado
+- **best_plate_yolo11m.pt** (40.5 MB) – mAP@0.5 = 97.6% | mAP@0.5:0.95 = 72.3%
+- Descargar: [best_plate_yolo11m.pt](https://drive.google.com/file/d/1aXBGNtZn3Xe01iv-_I0JdVp_XEBHc-U5/view?usp=download)
+
+## Enlace a la carpeta completa del proyecto en Drive
+- Incluye modelo, gráficas, imágenes de prueba, etc.
+- https://drive.google.com/drive/folders/1DAiyY98AsRaeyaU6jO5yB-wK78dygjjR?usp=drive_link
