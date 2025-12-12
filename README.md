@@ -1,93 +1,77 @@
 # ProyectoFinal_PDI_DeteccionDePlacas
-# Sistema de Detección Automática de Placas Vehiculares  
+# Sistema de Detección Automática de Placas Vehiculares + Lectura de Texto (OCR)
+
 **Proyecto Final – Procesamiento Digital de Imágenes (2025-2)**  
-Universidad Nacional De Colombia – Juan Esteban López  
+Universidad Nacional de Colombia – Juan Esteban López (Juaano28)
 
 ## 1. Problema real que resolvemos
-En el parqueadero de la universidad (y en cientos de parqueaderos, conjuntos residenciales, centros comerciales en Colombia) se generan largas filas en horas pico porque:
-- El guardia debe identificar visualmente la placa del vehículo.
-- En muchos casos aún se registra manualmente la entrada/salida.
-- Esto genera congestión vehicular, pérdida de tiempo y errores humanos.
+En parqueaderos de universidades, conjuntos residenciales y centros comerciales en Colombia se generan largas filas porque:
+- El guardia debe identificar visualmente la placa.
+- En muchos casos aún se registra manualmente.
+- Esto genera congestión, pérdida de tiempo y errores humanos.
 
-**Solución propuesta**: Un sistema de visión por computadora capaz de detectar automáticamente la ubicación exacta de la placa vehicular en tiempo real utilizando redes neuronales convolucionales.
+**Solución propuesta**: Un sistema de visión por computadora que:
+1. Detecta automáticamente la ubicación exacta de la placa vehicular (YOLOv11).
+2. Lee el texto de la placa en tiempo real (EasyOCR).
+3. Es rápido, preciso y desplegable en entornos reales (incluyendo dispositivos móviles).
 
-## 2. Tarea de visión por computadora
-**Detección de objetos (Object Detection)**  
-→ Modelo: **YOLOv11** (Ultralytics)  
-→ Clase única: `license_plate`
+## 2. Tareas de visión por computadora
+- **Detección de objetos (Object Detection)** → YOLOv11m (1 clase: `license_plate`)
+- **Reconocimiento Óptico de Caracteres (OCR)** → EasyOCR (lectura de texto en placa recortada)
 
 ## 3. Objetivos del proyecto
 **General**  
-Desarrollar e implementar un sistema de detección de placas vehiculares basado en YOLO que sea rápido, preciso y desplegable en entornos reales.
+Desarrollar e implementar un sistema completo de detección y lectura de placas vehiculares basado en YOLOv11 + EasyOCR, rápido, preciso y desplegable.
 
 **Específicos**  
-- Alcanzar mAP@0.5 ≥ 0.92 en el conjunto de validación  
-- Exportar el modelo a TorchScript y TensorFlow Lite con mínima pérdida de precisión  
-- Implementar inferencia local y vía API (HuggingFace Spaces)  
-- Desplegar una aplicación web funcional para pruebas en tiempo real
+- Alcanzar mAP@0.5 ≥ 0.95 en validación  
+- Exportar el modelo a TensorFlow Lite (LiteRT) con mínima pérdida de precisión  
+- Implementar inferencia local con OCR  
+- Desplegar aplicación web funcional (subida de foto + webcam)  
+- Demostrar funcionamiento en tiempo real
+
+**Resultados alcanzados**  
+| Métrica              | Valor    |
+|----------------------|----------|
+| mAP@0.5              | 97.6%   |
+| mAP@0.5:0.95         | 72.3%   |
+| Precision            | 98.78%  |
+| Recall               | 94.76%  |
+| Tamaño original (.pt)| 38.6 MB |
+| Tamaño LiteRT (int8) | 19.7 MB (51% del original) |
 
 ## 4. Dataset utilizado
 **Principal**  
-Dataset: [License Plate Recognition](https://universe.roboflow.com/roboflow-universe-projects/license-plate-recognition-rxg4e/dataset/4)  
-- 10.1252 imágenes de entrenamiento + validación  
-- 1 clase: `license_plate`  
-- Formato YOLOv11 (incluye augmentations: lluvia, noche, blur, etc.)  
+- Dataset: [License Plate Recognition](https://universe.roboflow.com/roboflow-universe-projects/license-plate-recognition-rxg4e/dataset/4)
+- ~10.000 imágenes con augmentations (lluvia, noche, blur, etc.)
+- 1 clase: `license_plate`
+- Formato YOLOv11
 - Enlace público: https://universe.roboflow.com/roboflow-universe-projects/license-plate-recognition-rxg4e
 
-**Extra (opcional futuro)**  
-Se podrán agregar ~200 imágenes propias capturadas en parqueaderos colombianos para mejorar robustez local.
+**Extra**  
+- Imágenes propias capturadas en parqueaderos colombianos (para futuras mejoras de robustez local).
 
 ## 5. Tecnologías y herramientas
-| Etapa               | Tecnología / Librería                         | Versión / Modelo      |
-|---------------------|-----------------------------------------------|-----------------------|
-| Modelo              | Ultralytics YOLOv11                           | yolo11n / yolo11m     |
-| Framework           | PyTorch                                       | 2.4+                  |
-| Entrenamiento       | Kaggle Notebook (GPU P100)                    | -                     |
-| Exportación         | TorchScript, ONNX, TensorFlow Lite            | -                     |
-| Inferencia local    | Python + OpenCV                               | -                     |
-| Despliegue          | Hugging Face Spaces + Gradio                  | -                     |
-| Control de versiones| Git + GitHub                                  | -                     |
+| Etapa               | Tecnología / Librería              | Detalle                  |
+|---------------------|------------------------------------|--------------------------|
+| Modelo              | Ultralytics YOLOv11                | yolo11m                  |
+| Framework           | PyTorch                            | 2.4+                     |
+| OCR                 | EasyOCR                            | 1.7.1 (español)          |
+| Entrenamiento       | Kaggle Notebook (GPU)              | -                        |
+| Exportación         | TensorFlow Lite (int8)             | -                        |
+| Inferencia local    | Python + OpenCV + Streamlit        | -                        |
+| Despliegue          | Streamlit Cloud (app web con webcam)| Gratis y permanente      |
+| Control de versiones| Git + GitHub                       | -                        |
 
-## 6. Estructura del repositorio
-├── README.md                       ← Este archivo
-├── data/                           ← data.yaml (configuración dataset)
-├── notebooks/
-│   ├── 01_Entrenamiento_YOLOv11.ipynb
-│   ├── 02_Exportacion_y_Comparacion.ipynb
-│   └── 03_Despliegue_HuggingFace.ipynb
-├── scripts/
-│   ├── inferencia_local.py         ← Recibe ruta de imagen y muestra detección
-│   └── inferencia_api.py           ← Consume API de HuggingFace
-├── weights/
-│   ├── best.pt                     ← Modelo entrenado (PyTorch)
-│   ├── best.torchscript            ← Exportado TorchScript
-│   └── best_openvino_model/        ← (opcional)
-├── presentation/
-│   └── Exposicion_Proyecto_Final_PDI.pptx
-└── requirements.txt
-
-## 7. Enlaces importantes
+## 6. Enlaces importantes
 - Repositorio GitHub: https://github.com/Juaano28/ProyectoFinal_PDI_DeteccionDePlacas
 - Dataset en Roboflow: https://universe.roboflow.com/roboflow-universe-projects/license-plate-recognition-rxg4e
-- Hugging Face Space (demo en vivo): [se agrega al final]
-- Base de datos (enlace Drive/Roboflow): [se agrega al final]
+- Modelo entrenado (.pt): https://drive.google.com/file/d/1aXBGNtZn3Xe01iv-_I0JdVp_XEBHc-U5/view?usp=sharing
+- Modelo LiteRT (.tflite): [En carpeta Drive]
+- Carpeta completa del proyecto (modelos, gráficas, resultados): https://drive.google.com/drive/folders/1DAiyY98AsRaeyaU6jO5yB-wK78dygjjR?usp=drive_link
+- App web en vivo (Streamlit Cloud): [Pendiente – agregar al finalizar despliegue]
 
-## 8. Estado actual del proyecto
-| Tarea                             | Estado       |
-|-----------------------------------|--------------|
-| Dataset descargado y configurado  | ✅ Completado |
-| Entrenamiento YOLOv11             | En curso     |
-| Exportación del modelo            | Pendiente    |
-| Inferencia local                  | Pendiente    |
-| Inferencia vía API                | Pendiente    |
-| Despliegue en HuggingFace         | Pendiente    |
-| Presentación PowerPoint           | Pendiente    |
-
-
-## Pesos del modelo entrenado
-- **best_plate_yolo11m.pt** (40.5 MB) – mAP@0.5 = 97.6% | mAP@0.5:0.95 = 72.3%
-- Descargar: [best_plate_yolo11m.pt](https://drive.google.com/file/d/1aXBGNtZn3Xe01iv-_I0JdVp_XEBHc-U5/view?usp=download)
-
-## Enlace a la carpeta completa del proyecto en Drive
-- Incluye modelo, gráficas, imágenes de prueba, etc.
-- https://drive.google.com/drive/folders/1DAiyY98AsRaeyaU6jO5yB-wK78dygjjR?usp=drive_link
+## Instalación y uso local
+```bash
+pip install ultralytics easyocr streamlit opencv-python-headless
+streamlit run app.py
